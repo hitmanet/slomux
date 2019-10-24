@@ -8,11 +8,11 @@ const Timer = ({ timerTicking, toggleTimer, currentInterval, changeInterval}) =>
   const [currentTime, setCurrentTime] = useState(0)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setCurrentTime(currentTime => currentTime + currentInterval),
+    const interval = setInterval(() => setCurrentTime(currentTime => currentTime + currentInterval),
       currentInterval * 1000
     )
     return () => {
-      clearTimeout(timeout)
+      clearInterval(interval)
     }
   }, [timerTicking])
 
