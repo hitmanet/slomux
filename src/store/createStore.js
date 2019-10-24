@@ -5,11 +5,15 @@ export default (reducer, initialState = {}) => {
     const dispatch = action => {
       currentState = reducer(currentState, action)
       listeners.forEach(listener => listener())
+      return action
     }
     const subscribe = listener => {
       listeners.push(listener)
       return () => {
-        listeners.splice(listeners.indexOf(listener), 1)
+        const index = listeners.indexOf(listener)
+        if (index >= 0) {
+          listeners.splice(index, 1)
+        }
       }
     }
     return { getState, dispatch, subscribe }
